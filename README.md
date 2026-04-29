@@ -22,8 +22,8 @@ Run the script with no arguments for an interactive prompt:
 ```bash
 ./kcloud.sh --backup [dest_dir]
 ./kcloud.sh --restore [src_dir]
-./kcloud.sh --backup-gist [gist_id] [work_dir]
-./kcloud.sh --restore-gist [gist_id] [dest_dir]
+./kcloud.sh --backup-gist [backup_name] [work_dir]
+./kcloud.sh --restore-gist [backup_name] [dest_dir]
 ```
 
 You can run it straight from `seglectic.com`:
@@ -35,7 +35,8 @@ curl -fsSL https://seglectic.com/scripts/kcloud.sh | bash
 ## Notes
 
 - Gist sync uses the authenticated `gh` CLI session.
-- If no gist ID is provided to `--backup-gist`, KCloud creates a new private gist.
+- `--backup-gist` uses a human-readable backup name as the gist description and updates that backup if it already exists.
+- `--restore-gist` can list your available KCloud backups when you omit the backup name.
 - Backups may contain personal paths, hostnames, bookmarks, and other machine-specific settings.
 - Hardware-specific settings such as display layout and per-device input tuning are intentionally excluded.
 - Gist-backed backups can still include personal information such as SSH host aliases, bookmarks, local paths, widget/app state, and custom scripts. Keep gists private and review the backup set before syncing if you use work-only or sensitive resources.

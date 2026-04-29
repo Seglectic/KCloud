@@ -1,0 +1,39 @@
+name: Sync to GitHub Pages
+
+on:
+  push:
+    branches:
+      - master
+
+permissions:
+  contents: read
+
+jobs:
+  sync-pages:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout KCloud
+        uses: actions/checkout@v4
+
+      - name: Checkout Pages repo
+        uses: actions/checkout@v4
+        with:
+          repository: Seglectic/seglectic.github.io
+          token: ${{ secrets.PAGES_REPO_TOKEN }}
+          path: pages
+
+      - name: Copy published script
+        run: |
+          mkdir -p pages/scripts
+          install -m 755 kcloud.sh pages/scripts/kcloud.sh
+
+      - name: Commit and push changes
+        run: |
+          cd pages
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add scripts/kcloud.sh
+          git diff --cached --quiet && exit 0
+          git commit -m "Sync kcloud.sh from KCloud"
+          git push origin HEAD

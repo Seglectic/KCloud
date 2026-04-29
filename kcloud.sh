@@ -320,7 +320,7 @@ download_gist_backup() {
 do_backup_gist() {
     local gist_id="${1:-}"
     local work_dir="$2"
-    local backup_dir="$work_dir/backup"
+    local backup_dir="${work_dir%/}.backup"
 
     require_command tar
     require_command base64
@@ -332,9 +332,11 @@ do_backup_gist() {
         echo "Tip: export KCLOUD_GIST_ID=$gist_id"
     fi
 
+    rm -rf "$backup_dir"
     do_backup "$backup_dir"
     create_archive_from_backup "$backup_dir" "$work_dir"
     upload_gist_backup "$gist_id" "$work_dir"
+    rm -rf "$backup_dir"
     echo "Local working files: $work_dir"
 }
 

@@ -40,6 +40,8 @@ curl -fsSL https://seglectic.com/scripts/kcloud.sh | bash
 - Hardware-specific settings such as display layout and per-device input tuning are intentionally excluded.
 - Gist-backed backups can still include personal information such as SSH host aliases, bookmarks, local paths, widget/app state, and custom scripts. Keep gists private and review the backup set before syncing if you use work-only or sensitive resources.
 - Restoring overwrites matching settings and creates `.kcloud-pre-restore.bak` copies where possible.
+- This repo includes a GitHub Actions workflow that mirrors `kcloud.sh` to `Seglectic/seglectic.github.io` at `scripts/kcloud.sh`.
+- The Pages sync workflow expects a repo secret named `PAGES_REPO_TOKEN` with push access to `Seglectic/seglectic.github.io`.
 
 ## Requirements
 

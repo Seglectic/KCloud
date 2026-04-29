@@ -3,7 +3,8 @@ name: Sync to GitHub Pages
 on:
   push:
     branches:
-      - master
+      - main
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -22,6 +23,7 @@ jobs:
           repository: Seglectic/seglectic.github.io
           token: ${{ secrets.PAGES_REPO_TOKEN }}
           path: pages
+          ref: master
 
       - name: Copy published script
         run: |
